@@ -54,10 +54,11 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm ci
       - name: Run production migration
-        run: npm run migration:deploy
+        run: |
+          npm run migration:deploy
+          npm run db:push
         env: 
           DATABASE_URL: ${{secrets.DATABASE_URL}}
-      - run: npm run db:push
       - uses: akhileshns/heroku-deploy@v3.12.12
         name: Deploy To heroku
         with:
