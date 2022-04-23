@@ -5,6 +5,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { PrismaClient } from '@prisma/client';
 import { userRouter } from './users/users.router';
+import { errorHandler } from './error/error.middleware';
+import { notFoundHandler } from './error/not-found.middleware';
+import { loginRouter } from './auth/auth.router';
 
 export const app: Application = express();
 export const prisma = new PrismaClient();
@@ -19,4 +22,9 @@ app.get('/', (_req: Request, res: Response) => {
 	res.send(`Server is running`);
 });
 
-app.use('/api/users', userRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/login', loginRouter);
+
+
+app.use(errorHandler);
+app.use(notFoundHandler);

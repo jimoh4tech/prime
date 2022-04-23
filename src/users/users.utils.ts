@@ -22,7 +22,7 @@ const parseEmail = (email: unknown): string => {
 	return email;
 };
 
-const parsePassword = (password: unknown): string => {
+export const parsePassword = (password: unknown): string => {
 	if (!password || !isString(password)) {
 		throw new Error('Incorrect or missing password ' + password);
 	}
@@ -53,7 +53,10 @@ const throwError = (error: unknown) => {
 	if (error instanceof Error) {
 		errorMessage += 'Error: ' + error.message;
 	}
-	return errorMessage;
+	return {
+		success: false,
+		message: errorMessage
+	};
 };
 
 export { toNewUser, throwError };
