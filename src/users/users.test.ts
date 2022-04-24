@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import supertest from 'supertest';
 import { app, prisma } from '../app';
 
 const api = supertest(app);
 
 beforeAll(async () => {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+	await prisma.comment.deleteMany({});
+	await prisma.post.deleteMany({});
 	await prisma.user.deleteMany({});
 });
 
 afterAll(async () => {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	await prisma.$disconnect();
 });
 

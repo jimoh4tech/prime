@@ -60,7 +60,10 @@ const getUserById = async (req: Request, res: Response) => {
 				email: true,
 			},
 		});
-		res.status(200).json(user);
+		res.status(200).json({
+			success: true,
+			data: user,
+		});
 	} catch (error: unknown) {
 		res.status(400).json(throwError(error));
 	}
@@ -98,7 +101,10 @@ const updateUser = async (req: Request, res: Response) => {
 					email: true,
 				},
 			});
-			return res.status(200).json(updatedUser);
+			return res.status(200).json({
+				success: true,
+				data: updatedUser,
+			});
 		}
 		throw new Error('User not found');
 	} catch (error: unknown) {
