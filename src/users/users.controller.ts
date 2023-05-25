@@ -9,6 +9,17 @@ const registerUser = async (req: Request, res: Response) => {
 	try {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		const newUser = toNewUser(req.body);
+
+		const existingUser = await prisma.user.findUnique({
+			select: {
+				email: true,
+			},
+			where: {
+				email: newUser.email,
+			},
+		});
+
+		if (existingUser) return res.status(403).send('User already registered!');
 		newUser.password = await hash(newUser.password, 10);
 		const user = await prisma.user.create({
 			data: {
@@ -35,6 +46,8 @@ const getAllUser = async (_req: Request, res: Response) => {
 				id: true,
 				username: true,
 				email: true,
+				createdAt: true,
+				updatedAt: true,
 			},
 		});
 		res.status(200).json({
