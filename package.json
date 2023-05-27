@@ -9,7 +9,7 @@
 		"start": "node build/index.js",
 		"migration:deploy": "prisma migrate deploy",
 		"db:push": "prisma db push --preview-feature",
-		"migration:test":"dotenv -e .env.test -- npx prisma migrate deploy",
+		"migration:test": "dotenv -e .env.test -- npx prisma migrate deploy",
 		"test": "dotenv -e .env.test -- jest --verbose --detectOpenHandles --runInBand --forceExit",
 		"build": "prisma generate && tsc"
 	},
@@ -36,7 +36,7 @@
 		"@typescript-eslint/parser": "^5.20.0",
 		"eslint": "^8.13.0",
 		"jest": "^27.5.1",
-		"prisma": "^3.12.0",
+		"prisma": "^3.15.2",
 		"supertest": "^6.2.2",
 		"ts-jest": "^27.1.4",
 		"ts-node-dev": "^1.1.8",
