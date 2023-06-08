@@ -38,9 +38,6 @@ jobs:
       - run: npm ci
       - run: npm run db:push
 
-      - name: Build
-        run: npm run build --if-present
-
       - name: Test
         run: npm test
 
